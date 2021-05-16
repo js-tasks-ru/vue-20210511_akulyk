@@ -3,10 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>MeetupTitle</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Решение -->
+<div id="app" v-cloak>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="form-check" v-for="meetup in meetups">
+        <input
+          :key="meetup.id"
+          type="radio"
+          @click="handleClick"
+          :value="meetup.id"
+          :checked="meetup.checked"
+          class="form-check-input"
+          :id="'radio-meetup-num-' + meetup.id"
+        />
+          <label class="form-check-label" :for="'radio-meetup-num-' + meetup.id">
+            {{ meetup.id }} {{ meetup.title }}
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <script type="module" src="script.js"></script>
 </body>
