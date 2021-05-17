@@ -14,9 +14,9 @@
 
 <div id="app" v-cloak>
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="form-check" v-for="meetup in meetups">
+    <div class="d-flex flex-sm-row">
+      <div class="col" v-for="meetup in meetups">
+        <div class="form-check" >
         <input
           :key="meetup.id"
           type="radio"
@@ -30,7 +30,11 @@
             {{ meetup.id }} {{ meetup.title }}
           </label>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{title}}
       </div>
     </div>
   </div>
