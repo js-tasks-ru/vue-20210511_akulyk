@@ -33,25 +33,7 @@ const app = new Vue({
     },
 
     async handleClick(e) {
-      const id = +e.target.value;
-      this.id = id;
-      const meetup = this.meetups
-        .map((meetup) => {
-          meetup.checked = false;
-          return meetup;
-        })
-        .find((m) => m.id === id);
-      if (!meetup) {
-        return;
-      }
-      meetup.checked = true;
-      return;
-      /* no sense because of watch
-      const response = await fetch(`https://course-vue.javascript.ru/api/meetups/${id}`).then((res) => res.json());
-      meetup.title = response.title;
-      this.title = response.title;
-
-       */
+      this.id = +e.target.value;
     },
   },
 });

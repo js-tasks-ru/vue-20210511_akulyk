@@ -23,7 +23,7 @@
           @click="handleClick"
           :value="meetup.id"
           :model.number="id"
-          :checked="meetup.checked"
+          :checked="meetup.id === id"
           class="form-check-input"
           :id="'radio-meetup-num-' + meetup.id"
         />
