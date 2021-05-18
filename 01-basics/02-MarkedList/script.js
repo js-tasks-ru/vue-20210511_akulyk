@@ -35,7 +35,7 @@ const emails = [
 const app = new Vue({
   data() {
     return {
-      emails: [],
+      emails,
       term: null,
     };
   },
@@ -50,10 +50,6 @@ const app = new Vue({
 
       return found;
     },
-  },
-
-  created() {
-    this.emails = emails;
   },
 
   methods: {
