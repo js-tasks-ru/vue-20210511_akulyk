@@ -4,8 +4,6 @@ const app = new Vue({
   data() {
     return {
       id: null,
-      meetupsAmount: 5,
-      meetups: [],
       title: null,
     };
   },
@@ -14,16 +12,6 @@ const app = new Vue({
     async id(newValue, oldValue) {
       await this.getTitle(newValue);
     },
-  },
-
-  created() {
-    for (let i = 1; i <= this.meetupsAmount; i++) {
-      this.meetups.push({
-        id: i,
-        title: null,
-        checked: false,
-      });
-    }
   },
 
   methods: {

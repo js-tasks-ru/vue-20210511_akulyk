@@ -15,20 +15,20 @@
 <div id="app" v-cloak>
   <div class="container">
     <div class="d-flex flex-sm-row">
-      <div class="col" v-for="meetup in meetups">
+      <div class="col" v-for="i in 5">
         <div class="form-check" >
         <input
-          :key="meetup.id"
+          :key="i"
           type="radio"
           @click="handleClick"
-          :value="meetup.id"
+          :value="i"
           :model.number="id"
-          :checked="meetup.id === id"
+          :checked="i === id"
           class="form-check-input"
-          :id="'radio-meetup-num-' + meetup.id"
+          :id="'radio-meetup-num-' + i"
         />
-          <label class="form-check-label" :for="'radio-meetup-num-' + meetup.id">
-            {{ meetup.id }} {{ meetup.title }}
+          <label class="form-check-label" :for="'radio-meetup-num-' + i">
+            {{ i }}
           </label>
         </div>
       </div>
