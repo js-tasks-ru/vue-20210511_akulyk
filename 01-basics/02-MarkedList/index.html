@@ -19,7 +19,7 @@
 
 <div id="app" v-cloak class="container">
     <div class="input-group mb-3 mt-3">
-        <input type="text" @input="debouncedSearch" class="form-control"/>
+        <input type="text" :model="term" @input="debouncedSearch" class="form-control"/>
     </div>
     <ul class="list-group">
         <li v-for="email in emails" :key="email" class="list-group-item" :class="{'marked' : found && found.includes(email)}">{{ email }}</li>
