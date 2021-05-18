@@ -50,33 +50,22 @@ const app = new Vue({
         meetup: null,
       }
     },
-    computed: {
-      agendaType() {
-        return (type) => agendaItemDefaultTitles[type];
-      },
-      agendaIcon() {
-        return (type) => agendaItemIcons[type];
-      },
-      localeDate() {
-        return (date) => {
-          return new Date(date).toLocaleString(navigator.language, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          });
-        };
-      },
-      dateOnlyString() {
-        return (date) => {
-          return new Date(date).toISOString().split('T')[0];
-        };
-      },
-      coverImage() {
-        return (id) => ({ '--bg-url':`url(${getImageUrlByImageId(id)})`});
-      }
-    },
     async created() {
       const meetup = await fetch(`${API_URL}/meetups/${MEETUP_ID}`).then((res) => res.json());
+      //todo move logic to separate method
+      meetup.coverImage = {'--bg-url': `url(${getImageUrlByImageId(meetup.imageId)})`};
+      if(meetup.agenda.length){
+        meetup.agenda.forEach((agenda) =>{
+          agenda.typeName = agendaItemDefaultTitles[agenda.type];
+          agenda.icon = agendaItemIcons[agenda.type];
+        });
+      }
+      meetup.localDate = new Date(meetup.date).toLocaleString(navigator.language, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+      meetup.dateOnlyString = new Date(meetup.date).toISOString().split('T')[0];
       this.meetup = meetup;
     }
   })
