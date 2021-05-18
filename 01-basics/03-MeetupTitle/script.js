@@ -12,9 +12,6 @@ const app = new Vue({
 
   watch: {
     async id(newValue, oldValue) {
-      if (oldValue === newValue) {
-        return;
-      }
       await this.getTitle(newValue);
     },
   },
