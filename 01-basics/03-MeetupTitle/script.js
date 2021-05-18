@@ -12,8 +12,6 @@ const app = new Vue({
 
   watch: {
     async id(newValue, oldValue) {
-      newValue = Number(newValue);
-      oldValue = Number(oldValue);
       if (oldValue === newValue) {
         return;
       }
