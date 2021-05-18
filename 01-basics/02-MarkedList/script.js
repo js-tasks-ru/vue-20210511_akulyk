@@ -47,8 +47,10 @@ const app = new Vue({
       if (!found) {
         found = [];
       }
-
       return found;
+    },
+    isMarked() {
+      return (email) => this.found && this.found.includes(email);
     },
   },
 
