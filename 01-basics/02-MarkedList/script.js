@@ -53,8 +53,7 @@ const app = new Vue({
   },
 
   methods: {
-    debouncedSearch(e, delay) {
-      delay = delay || 1000;
+    debouncedSearch(e, delay = 1000) {
       const search = debounce(this.handleInput, delay);
       return search(e);
     },
