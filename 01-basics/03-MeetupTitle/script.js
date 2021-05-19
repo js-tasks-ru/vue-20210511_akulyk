@@ -19,10 +19,6 @@ const app = new Vue({
       const response = await fetch(`https://course-vue.javascript.ru/api/meetups/${id}`).then((res) => res.json());
       this.title = response.title;
     },
-
-    async handleClick(e) {
-      this.id = +e.target.value;
-    },
   },
 });
 

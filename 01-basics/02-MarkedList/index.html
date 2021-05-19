@@ -22,7 +22,7 @@
         <input type="text" :value="term" @input="debouncedSearch" class="form-control"/>
     </div>
     <ul class="list-group">
-        <li v-for="email in emails" :key="email" class="list-group-item" :class="{'marked' : isMarked(email)}">{{ email }}</li>
+        <li v-for="email in list" :key="email.value" class="list-group-item" :class="{'marked' : email.marked}">{{ email.value }}</li>
     </ul>
 </div>
 

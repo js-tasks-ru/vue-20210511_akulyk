@@ -41,21 +41,17 @@ const app = new Vue({
   },
 
   computed: {
-    found() {
-      const term = this.term;
-      let found = term ? this.emails.filter((email) => email.toLowerCase().search(term) !== -1) : [];
-      if (!found) {
-        found = [];
-      }
-      return found;
-    },
-    isMarked() {
-      return (email) => this.found && this.found.includes(email);
-    },
+    list() {
+
+        return this.emails.map((email) => ({
+           value:email,
+           marked: email.toLowerCase().search(this.term) !== -1,
+        }));
+    }
   },
 
   methods: {
-    debouncedSearch(e, delay = 1000) {
+    debouncedSearch(e, delay = 500) {
       const search = debounce(this.handleInput, delay);
       return search(e);
     },
