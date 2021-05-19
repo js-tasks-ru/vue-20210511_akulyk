@@ -3,10 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>MeetupTitle</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Решение -->
+<div id="app" v-cloak>
+  <div class="container">
+    <div class="d-flex flex-sm-row">
+      <div class="col" v-for="i in 5">
+        <div class="form-check" >
+        <input
+          :key="i"
+          type="radio"
+          v-model="id"
+          :value="i"
+          class="form-check-input"
+          :id="'radio-meetup-num-' + i"
+        />
+          <label class="form-check-label" :for="'radio-meetup-num-' + i">
+            {{ i }}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{title}}
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <script type="module" src="script.js"></script>
 </body>

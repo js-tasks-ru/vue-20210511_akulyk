@@ -1,3 +1,17 @@
-// import Vue from './vendor/vue.esm.browser.js';
+import Vue from './vendor/vue.esm.browser.js';
 
-// Требуется создать Vue приложение
+const app = new Vue({
+  template: '#app',
+  data(){
+    return {
+        count: 0,
+    }
+  },
+  methods:{
+    clickHandler(event){
+      this.count++;
+    }
+  }
+});
+
+app.$mount('#app');

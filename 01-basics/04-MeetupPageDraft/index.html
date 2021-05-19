@@ -10,56 +10,63 @@
 </head>
 <body>
 <div id="app">
-  <div>
-    <div class="meetup-cover">
-      <h1 class="meetup-cover__title">Название митапа</h1>
-    </div>
+  <template v-if="meetup">
+    <div>
+      <div class="meetup-cover" :style="meetup.coverImage">
+        <h1 class="meetup-cover__title">{{ meetup.title }}</h1>
+      </div>
 
-    <div class="container">
-      <div class="meetup">
-        <div class="meetup__content">
-          <h3>Описание</h3>
-          <p class="meetup-description">Описание митапа</p>
+      <div class="container">
+        <div class="meetup">
+          <div class="meetup__content">
+            <h3>Описание</h3>
+            <p class="meetup-description">{{ meetup.description }}</p>
 
-          <h3>Программа</h3>
-          <p class="meetup-agenda__empty">Программа пока пуста, но когда-нибудь в ней обязательно что-нибудь появится!</p>
-          <div class="meetup-agenda">
-            <div class="meetup-agenda__item">
-              <div class="meetup-agenda__item-col">
-                <img class="icon" alt="icon" src="/assets/icons/icon-cal-sm.svg" />
+            <h3>Программа</h3>
+            <p class="meetup-agenda__empty" v-if="!meetup.agenda.length">Программа пока пуста, но когда-нибудь в ней
+              обязательно что-нибудь
+              появится!</p>
+            <div class="meetup-agenda" v-else>
+              <div class="meetup-agenda__item" v-for="agenda in meetup.agenda" :key="agenda.id">
+                <div class="meetup-agenda__item-col">
+                  <img class="icon" alt="icon" :src="`/assets/icons/icon-${agenda.icon}.svg`"/>
+                </div>
+                <div class="meetup-agenda__item-col">{{ agenda.startsAt }} - {{ agenda.endsAt }}</div>
+                <div class="meetup-agenda__item-col">
+                  <h5 class="meetup-agenda__title">{{ agenda.typeName }}</h5>
+                  <p v-if="agenda.speaker">
+                    <span>{{ agenda.speaker }}</span>
+                    <span class="meetup-agenda__dot"></span>
+                    <span class="meetup-agenda__lang">{{ agenda.language }}</span>
+                  </p>
+                  <p v-if="agenda.description">{{ agenda.description }}</p>
+                </div>
               </div>
-              <div class="meetup-agenda__item-col">00:00 - 00:00</div>
-              <div class="meetup-agenda__item-col">
-                <h5 class="meetup-agenda__title">Название доклада</h5>
-                <p><span>Докладчик</span><span class="meetup-agenda__dot"></span><span class="meetup-agenda__lang">RU</span></p>
-                <p>Описание доклада</p>
-              </div>
+
             </div>
-
           </div>
-        </div>
 
-        <div class="meetup__aside">
-          <ul class="info-list">
-            <li>
-              <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-user.svg" />
-              Организатор
-            </li>
-            <li>
-              <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-map.svg" />
-              Место
-            </li>
-            <li>
-              <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-cal-lg.svg" />
-              <time datetime="2020-02-31">31 фев. 2020</time>
-            </li>
-          </ul>
+          <div class="meetup__aside">
+            <ul class="info-list">
+              <li>
+                <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-user.svg"/>
+                {{ meetup.organizer }}
+              </li>
+              <li>
+                <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-map.svg"/>
+                {{ meetup.place }}
+              </li>
+              <li>
+                <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-cal-lg.svg"/>
+                <time :datetime="meetup.dateOnlyString">{{ meetup.localDate }}</time>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
-
+</template>
 <script type="module" src="script.js"></script>
 </body>
 </html>
