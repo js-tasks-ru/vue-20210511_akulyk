@@ -11,6 +11,10 @@
     .rangepicker__selector-control-right {
       background-image: url("/assets/icons/icon-pill-active.svg") ;
     }
+
+    .rangepicker__cell.rangepicker__current {
+      background-color: #b3d9cc;
+    }
   </style>
   <title>MeetupsCalendar</title>
 </head>
@@ -21,7 +25,7 @@
 
 <script type="module">
   import Vue from './vendor/vue.esm.browser.js';
-  import { MeetupsCalendar } from './MeetupsCalendar.js';
+  import MeetupsCalendar  from './MeetupsCalendar.js';
 
   const app = new Vue({
     el: '#app',
