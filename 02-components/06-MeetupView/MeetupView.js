@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     imageSrc() {
-      return getImageUrlByImageId(this.meetup.imageId);
+      return this.meetup.imageId ? getImageUrlByImageId(this.meetup.imageId) : null;
     },
   },
 
