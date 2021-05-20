@@ -16,14 +16,14 @@ export default {
   },
   computed: {
     localDate() {
-      return new Date(this.date).toLocaleString(navigator.language, {
+      return this.date.toLocaleString(navigator.language, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       });
     },
     dateOnlyString() {
-      return new Date(this.date).toISOString().split('T')[0];
+      return this.date.toISOString().split('T')[0];
     },
   },
   template: `
