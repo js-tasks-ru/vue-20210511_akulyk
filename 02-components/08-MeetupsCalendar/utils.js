@@ -1,4 +1,4 @@
-export function mapMeetupToDates(meetups,items){
+export function mapMeetupToDates(meetups, items) {
   items.forEach((item) => {
     item.items = [];
     meetups.forEach((meetup) => {
@@ -17,12 +17,12 @@ export function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
   return day - 1;
 }
 
-export function getNextMonth(date){
-  return new Date(date.setMonth(date.getMonth() + 1));
+export function getNextMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 1);
 }
 
-export function getPrevMonth(date){
-  return new Date(date.setMonth(date.getMonth() - 1));
+export function getPrevMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1);
 }
 
 export function hasSameDate(date1, date2) {
@@ -35,7 +35,7 @@ export function hasSameDate(date1, date2) {
   return date1.getDate() === date2.getDate();
 }
 
-export function buildMonthItems(currentDate){
+export function buildMonthItems(currentDate) {
   let items = [];
   const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
   for (let i = 0; i < getDay(date); i++) {
@@ -58,7 +58,7 @@ export function buildMonthItems(currentDate){
     });
     date.setDate(date.getDate() + 1);
   }
-  if(getDay(date) !== 0) {
+  if (getDay(date) !== 0) {
     for (let i = getDay(date); i < 7; i++) {
       items.push({
         date: new Date(date.getTime()),
@@ -69,13 +69,13 @@ export function buildMonthItems(currentDate){
       date.setDate(date.getDate() + 1);
     }
   }
-  return items.map((item)=>({
+  return items.map((item) => ({
     ...item,
-    current: hasSameDate(item.date,new Date()),
+    current: hasSameDate(item.date, new Date()),
   }));
 }
 
-export function buildMonthMatrix(items){
+export function buildMonthMatrix(items) {
   const matrix = [];
   for (let i = 0; i < items.length;) {
     let tmp = [];
