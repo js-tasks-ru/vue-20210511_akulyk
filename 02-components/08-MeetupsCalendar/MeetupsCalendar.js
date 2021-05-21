@@ -54,19 +54,19 @@ const MeetupsCalendar = {
         <div class="rangepicker__week_cell">Saturday</div>
         <div class="rangepicker__week_cell">Sunday</div>
       </div>
-      <div v-for="(week, keyWeek) in grid" :key="keyWeek" class="rangepicker__date-grid">
+      <div class="rangepicker__date-grid">
+        <template v-for="(week, keyWeek) in grid">
         <div v-for="(date, keyDate) in week"
              :key="date.date.toString()"
              class="rangepicker__cell"
              :class="{'rangepicker__cell_inactive': !date.active, 'rangepicker__current': date.current}"
         >
           {{ date.day }}
-          <template v-if="date.items.length">
-            <a class="rangepicker__event" v-for="item in date.items">
+            <a v-if="date.items.length" class="rangepicker__event" v-for="item in date.items">
               {{ item.title }}
             </a>
-          </template>
         </div>
+        </template>
       </div>
     </div>
     </div>`,
