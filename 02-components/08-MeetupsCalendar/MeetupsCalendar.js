@@ -1,34 +1,75 @@
 /*
   Полезные функции по работе с датой можно описать вне Vue компонента
  */
+import {mapMeetupToDates, buildMonthItems, buildMonthMatrix, getNextMonth, getPrevMonth} from "./utils.js";
 
 const MeetupsCalendar = {
   name: 'MeetupsCalendar',
-
-  template: `<div class="rangepicker">
+  props: {
+    meetups: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+  },
+  data: () => ({
+    current: new Date(),
+  }),
+  computed: {
+    currentMonth() {
+      return this.current.toLocaleString(navigator.language, {month: 'long'});
+    },
+    currentYear() {
+      return this.current.toLocaleString(navigator.language, {year: 'numeric',});
+    },
+    grid() {
+      let items = mapMeetupToDates(this.meetups, buildMonthItems(this.current));
+      return buildMonthMatrix(items);
+    },
+  },
+  methods: {
+    nextMonth() {
+      this.current = getNextMonth(this.current);
+    },
+    prevMonth() {
+      this.current = getPrevMonth(this.current);
+    },
+  },
+  template: `
+    <div class="rangepicker">
     <div class="rangepicker__calendar">
       <div class="rangepicker__month-indicator">
         <div class="rangepicker__selector-controls">
-          <button class="rangepicker__selector-control-left"></button>
-          <div>Июнь 2020</div>
-          <button class="rangepicker__selector-control-right"></button>
+          <button class="rangepicker__selector-control-left" @click="prevMonth"></button>
+          <div>{{ currentMonth }} {{ currentYear }}</div>
+          <button class="rangepicker__selector-control-right" @click="nextMonth"></button>
         </div>
+      </div>
+      <div class="rangepicker__date-grid-week">
+        <div class="rangepicker__week_cell">Monday</div>
+        <div class="rangepicker__week_cell">Tuesday</div>
+        <div class="rangepicker__week_cell">Wednesday</div>
+        <div class="rangepicker__week_cell">Thursday</div>
+        <div class="rangepicker__week_cell">Friday</div>
+        <div class="rangepicker__week_cell">Saturday</div>
+        <div class="rangepicker__week_cell">Sunday</div>
       </div>
       <div class="rangepicker__date-grid">
-        <div class="rangepicker__cell rangepicker__cell_inactive">28</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">29</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">30</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">31</div>
-        <div class="rangepicker__cell">
-          1
-          <a class="rangepicker__event">Митап</a>
-          <a class="rangepicker__event">Митап</a>
+        <template v-for="(week, keyWeek) in grid">
+        <div v-for="(date, keyDate) in week"
+             :key="date.date.toString()"
+             class="rangepicker__cell"
+             :class="{'rangepicker__cell_inactive': !date.active, 'rangepicker__current': date.current}"
+        >
+          {{ date.day }}
+            <a v-if="date.items.length" class="rangepicker__event" v-for="item in date.items">
+              {{ item.title }}
+            </a>
         </div>
-        <div class="rangepicker__cell">2</div>
-        <div class="rangepicker__cell">3</div>
+        </template>
       </div>
     </div>
-  </div>`,
+    </div>`,
 };
 
 export default MeetupsCalendar;

@@ -64,17 +64,19 @@
   transform: rotate(180deg);
 }
 
-.rangepicker__date-grid {
+.rangepicker__date-grid,
+.rangepicker__date-grid-week{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
 
 /* Dates */
-.rangepicker__date-grid {
+.rangepicker__date-grid,
+.rangepicker__date-grid-week{
   border: 1px solid var(--grey);
   border-bottom: none;
 }
-
+.rangepicker__week_cell,
 .rangepicker__cell {
   position: relative;
   height: auto;
@@ -121,7 +123,8 @@
 }
 
 @media all and (min-width: 767px) {
-  .rangepicker__date-grid {
+  .rangepicker__date-grid,
+  .rangepicker__date-grid-week{
     grid-template-columns: repeat(7, 1fr);
   }
 
