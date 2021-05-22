@@ -1,35 +1,38 @@
 <template>
-  <div class="toasts">
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success 1</span>
-    </div>
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success 2</span>
-    </div>
-    <!-- ... -->
-    <div class="toast toast_error">
-      <app-icon icon="alert-circle" />
-      <span>Error 1</span>
-    </div>
+  <div v-if="messages.length" class="toasts">
+    <toaster-message v-for="message in messages" :key="message.label" :type="message.type" :message="message.label" />
   </div>
 </template>
 
 <script>
-import AppIcon from './AppIcon';
+import ToasterMessage from './ToasterMessage';
 
 const DELAY = 5000;
 
 export default {
   name: 'TheToaster',
 
-  components: { AppIcon },
+  components: { ToasterMessage },
+  data: () => ({
+    messages: [],
+  }),
 
   methods: {
-    error(message) {},
+    error(message) {
+      this.handleMessages('error', message);
+    },
 
-    success(message) {},
+    success(message) {
+      this.handleMessages('success', message);
+    },
+
+    handleMessages(type, message) {
+      this.messages.push({
+        type: type,
+        label: message,
+      });
+      setTimeout(() => this.messages.shift(), DELAY);
+    },
   },
 };
 </script>
