@@ -5,11 +5,11 @@
       <button @click="selectedType = 'registration'">Set registration</button>
     </p>
     <p>
-      <dropdown-button v-model="selectedType" :options="agendaItemTypes" title="Событие" />
+      <dropdown-button v-model="selectedType" :options="agendaItemTypes" title="Событие" :key="selectedType" />
     </p>
     <p>selectedLang = {{ selectedLang }}</p>
     <p>
-      <dropdown-button v-model="selectedLang" :options="langOptions" title="Язык" />
+      <dropdown-button v-model="selectedLang" :options="langOptions" title="Язык" :key="selectedLang" />
     </p>
   </div>
 </template>
