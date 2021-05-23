@@ -41,27 +41,38 @@ export default {
       type: String,
       required: true,
     },
-
     options: {
       type: Array,
       required: true,
     },
-
     value: {},
   },
   data: () => ({
     show: false,
-    label: null,
-    icon: null,
   }),
   computed: {
     hasIcon() {
       return this.options.some((item) => item.icon);
     },
+    label() {
+      if (!this.value) {
+        return this.title;
+      }
+      const selectedItem = this.findSelected(this.value);
+      return [this.title, selectedItem.text].join(' - ');
+    },
+    icon() {
+      if (this.value) {
+        const selectedItem = this.findSelected(this.value);
+        if (selectedItem && selectedItem.icon) {
+          return selectedItem.icon;
+        }
+      }
+      return null;
+    },
   },
   methods: {
     handleClick(value) {
-      this.setLabelAndIcon(value);
       this.$emit('change', value);
       this.showToggle();
     },
@@ -71,23 +82,6 @@ export default {
     findSelected(value) {
       return this.options.find((item) => item.value === value);
     },
-    setLabelAndIcon(value = null) {
-      if (value) {
-        const selectedItem = this.findSelected(value);
-        this.label = [this.title, selectedItem.text].join(' - ');
-        if (selectedItem && selectedItem.icon) {
-          this.icon = selectedItem.icon;
-        }
-      } else {
-        this.label = this.title;
-      }
-    },
-  },
-  created() {
-    this.setLabelAndIcon(this.value);
-  },
-  updated() {
-    this.setLabelAndIcon(this.value);
   },
 };
 </script>
