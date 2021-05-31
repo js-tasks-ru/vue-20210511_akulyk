@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <div class="footer">
+    Alexander Kulyk | Home Task 04-spa/04-layouts
+  </div>
+</template>
 
 <script>
 export default {
