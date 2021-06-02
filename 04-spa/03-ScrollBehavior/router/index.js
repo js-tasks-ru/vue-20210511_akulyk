@@ -15,6 +15,7 @@ export const router = new VueRouter({
     const { matched: fromMatched } = from;
     let toMatchedHasSaveScrollPosition = false;
     let fromMatchedHasSaveScrollPosition = false;
+
     if (toMatched) {
       toMatchedHasSaveScrollPosition = toMatched.some((item) => item.meta.saveScrollPosition);
     }
