@@ -1,6 +1,6 @@
 <template>
   <meetups-view
-    v-bind="currentRoute.query"
+    v-bind="currentQuery"
     @update:view="updateProp('view',$event)"
     @update:date="updateProp('date',$event)"
     @update:participation="updateProp('participation',$event)"
@@ -21,34 +21,32 @@ export default {
   components: {MeetupsView},
   props: Object.keys(defaults),
   computed: {
-    currentRoute() {
-      const query = {...this.$route.query};
-      return {path: '/', query};
+    currentQuery() {
+      return {...this.$route.query};
     },
   },
   methods: {
     updateProp(prop, value) {
-      const route = {...this.currentRoute};
-      route.query = {...route.query, [prop]: value};
-      this.changeRoute(route);
+      const query = {...this.currentQuery , [prop]: value};
+      this.changeQuery(query);
     },
 
-    changeRoute(route) {
-      route.query = this.removeDefaults(route.query);
-      this.$router.push(route).catch((failure) => {
+    changeQuery(query) {
+      const obj = { path: this.$route.path,query:this.removeDefaults(query) };
+      this.$router.push(obj).catch((failure) => {
         if (!isNavigationFailure(failure, NavigationFailureType.duplicated)) {
           throw failure;
         }
       });
     },
-
     removeDefaults(query) {
-      for (const name in query) {
-        if (query[name] === defaults[name]) {
-          delete query[name];
+      const newQuery = {...query};
+      for (const name in newQuery) {
+        if (newQuery[name] === defaults[name]) {
+          delete newQuery[name];
         }
       }
-      return {...query};
+      return {...newQuery};
     },
   },
 };
