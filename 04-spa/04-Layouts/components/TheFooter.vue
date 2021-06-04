@@ -1,6 +1,8 @@
 <template>
   <div class="footer">
-    Alexander Kulyk | Home Task 04-spa/04-layouts
+    <div class="container">
+    © 2021. learn.javascript.ru <a href="https://learn.javascript.ru/courses/vue">Vue.js Course</a>
+    </div>
   </div>
 </template>
 

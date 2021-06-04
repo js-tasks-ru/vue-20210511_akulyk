@@ -1,7 +1,9 @@
 <template>
-  <div class="page">
-    <h2>{{title}}</h2>
-    <p>Auth page</p>
+  <div class="page page_onboarding">
+    <div class="container">
+      <h1 class="page__title text-center">{{ title }}</h1>
+      <p>Auth page</p>
+    </div>
   </div>
 </template>
 
