@@ -1,7 +1,9 @@
 <template>
-  <div class="main">
+  <div id="app" class="wrapper bg-grey">
     <the-header :title="title"></the-header>
-    <slot></slot>
+    <div class="main">
+      <slot/>
+    </div>
     <the-footer></the-footer>
   </div>
 </template>
@@ -16,9 +18,9 @@ export default {
     'the-header': TheHeader,
     'the-footer': TheFooter,
   },
-  props:{
-    title:{
-      type:String,
+  props: {
+    title: {
+      type: String,
     },
   },
 };

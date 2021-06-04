@@ -1,9 +1,9 @@
 <template>
   <div class="header">
-    <h1>Meetups</h1>
+    <a href="/"><img src="/images/logo.svg" alt="Meetups" /></a>
     <nav>
-      <router-link :to="{ name: 'meetups' }">Митапы</router-link> |
-      <router-link :to="{ name: 'form' }">Создать митап</router-link> |
+      <router-link :to="{ name: 'meetups' }">Митапы</router-link>
+      <router-link :to="{ name: 'form' }">Создать митап</router-link>
       <router-link :to="{ name: 'login' }">Вход</router-link>
     </nav>
   </div>
