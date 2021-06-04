@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="wrapper bg-grey">
-    <the-header :title="title"></the-header>
+    <the-header></the-header>
     <div class="main">
       <slot/>
     </div>
@@ -17,11 +17,6 @@ export default {
   components: {
     'the-header': TheHeader,
     'the-footer': TheFooter,
-  },
-  props: {
-    title: {
-      type: String,
-    },
   },
 };
 </script>
