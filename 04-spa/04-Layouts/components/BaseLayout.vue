@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="wrapper bg-grey">
     <the-header></the-header>
-    <div class="main">
+    <main class="main">
       <slot/>
-    </div>
+    </main>
     <the-footer></the-footer>
   </div>
 </template>
