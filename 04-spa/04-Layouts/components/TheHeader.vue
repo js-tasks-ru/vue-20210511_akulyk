@@ -1,22 +1,17 @@
 <template>
-  <div class="header">
-    <a href="/"><img src="/images/logo.svg" alt="Meetups" /></a>
+  <header class="header">
+    <a href="/"><img src="@/assets/logo.svg" alt="Meetups" /></a>
     <nav>
       <router-link :to="{ name: 'meetups' }">Митапы</router-link>
       <router-link :to="{ name: 'form' }">Создать митап</router-link>
       <router-link :to="{ name: 'login' }">Вход</router-link>
     </nav>
-  </div>
+  </header>
 </template>
 
 <script>
 export default {
   name: 'TheHeader',
-  props: {
-    title: {
-      type: String,
-    },
-  },
 };
 </script>
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="footer">
+  <footer class="footer">
     <div class="container">
     © 2021. learn.javascript.ru <a href="https://learn.javascript.ru/courses/vue">Vue.js Course</a>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>
