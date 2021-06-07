@@ -51,31 +51,33 @@
 </template>
 
 <script>
+
+import {defaults} from '../utils.js';
 export default {
   name: 'MeetupsView',
 
   props: {
     view: {
       type: String,
-      default: 'list',
+      default: defaults.view,
       validator: (value) => ['list', 'calendar'].includes(value),
     },
 
     date: {
       type: String,
-      default: 'all',
+      default: defaults.date,
       validator: (value) => ['all', 'future', 'past'].includes(value),
     },
 
     participation: {
       type: String,
-      default: 'all',
+      default: defaults.participation,
       validator: (value) => ['all', 'attending', 'organizing'].includes(value),
     },
 
     search: {
       type: String,
-      default: '',
+      default: defaults.search,
     },
   },
 };

@@ -15,11 +15,12 @@ export const router = new VueRouter({
     const { matched: fromMatched } = from;
     let toMatchedHasSaveScrollPosition = false;
     let fromMatchedHasSaveScrollPosition = false;
-    if (toMatched.length) {
+
+    if (toMatched) {
       toMatchedHasSaveScrollPosition = toMatched.some((item) => item.meta.saveScrollPosition);
     }
 
-    if (fromMatched.length) {
+    if (fromMatched) {
       fromMatchedHasSaveScrollPosition = fromMatched.some((item) => item.meta.saveScrollPosition);
     }
 
@@ -28,9 +29,6 @@ export const router = new VueRouter({
     }
 
     if (savedPosition) {
-      if (typeof savedPosition === 'boolean') {
-        return false;
-      }
       return savedPosition;
     }
     const position = {};

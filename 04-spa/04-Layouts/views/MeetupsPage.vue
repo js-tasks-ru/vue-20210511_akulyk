@@ -1,10 +1,14 @@
 <template>
-  <p>MeetupsPage</p>
+  <div class="page">
+    <p>MeetupsPage</p>
+  </div>
 </template>
 
 <script>
+
 export default {
   name: 'MeetupsPage',
+  components: {},
 };
 </script>
 
