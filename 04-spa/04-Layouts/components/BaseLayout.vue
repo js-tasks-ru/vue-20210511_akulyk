@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="wrapper bg-grey">
-    <the-header :title="title"></the-header>
-    <div class="main">
+    <the-header></the-header>
+    <main class="main">
       <slot/>
-    </div>
+    </main>
     <the-footer></the-footer>
   </div>
 </template>
@@ -17,11 +17,6 @@ export default {
   components: {
     'the-header': TheHeader,
     'the-footer': TheFooter,
-  },
-  props: {
-    title: {
-      type: String,
-    },
   },
 };
 </script>
