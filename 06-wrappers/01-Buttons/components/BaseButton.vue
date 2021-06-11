@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" v-bind="props" v-on="listeners">
+  <component :is="tag" v-bind="props" v-on="listeners" class="button" :class="{'button_block': block}">
     <slot/>
   </component>
 </template>
@@ -24,12 +24,11 @@ export default {
       const props = { ...this.$attrs };
 
       if (this.tag === 'button') {
-        props.type = 'button';
-        props.class = props.class ? props.class + ' button' : 'button';
+        if (!props.type) {
+          props.type = 'button';
+        }
       }
-      if (this.block) {
-        props.class = props.class ? props.class + ' button_block' : 'button_block';
-      }
+
       return props;
     },
 
