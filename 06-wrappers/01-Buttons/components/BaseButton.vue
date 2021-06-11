@@ -1,10 +1,43 @@
 <template>
-  <button type="button" class="button"></button>
+  <component :is="tag" v-bind="props" v-on="listeners">
+    <slot/>
+  </component>
 </template>
 
 <script>
 export default {
   name: 'BaseButton',
+  props: {
+    tag: {
+      type: [String, Object],
+      default: 'button',
+    },
+
+    block: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  computed: {
+    props() {
+      const props = { ...this.$attrs };
+
+      if (this.tag === 'button') {
+        props.type = 'button';
+        props.class = props.class ? props.class + ' button' : 'button';
+      }
+      if (this.block) {
+        props.class = props.class ? props.class + ' button_block' : 'button_block';
+      }
+      return props;
+    },
+
+    listeners() {
+      const listeners = { ...this.$listeners };
+      return listeners;
+    },
+  },
 };
 </script>
 
