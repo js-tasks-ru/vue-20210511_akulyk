@@ -1,16 +1,84 @@
 <template>
-  <div class="input-group input-group_icon input-group_icon-left input-group_icon-right">
-    <img class="icon" />
-
-    <input ref="" class="form-control form-control_rounded form-control_sm" />
-
-    <img class="icon" />
+  <div class="input-group" :class="iconClass">
+    <slot name="left-icon" />
+    <component
+      :is="inputType"
+      v-bind="$attrs"
+      ref="input"
+      :value.prop="value"
+      class="form-control"
+      :class="inputClass"
+      v-on="listeners"
+      @input="$emit('input', $event.target.value)"
+      @change="$emit('change', $event.target.value)"
+    />
+    <slot name="right-icon" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'AppInput',
+  inheritAttrs: false,
+  props: {
+    value: {
+      type: String,
+      default: null,
+    },
+
+    small: {
+      type: Boolean,
+      default: false,
+    },
+
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
+
+    multiline: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  computed: {
+    listeners(){
+      const listeners = { ...this.$listeners };
+      delete listeners.input;
+      delete listeners.change;
+      return listeners;
+    },
+
+    inputType() {
+      return this.multiline ? 'textarea' : 'input';
+    },
+
+    iconClass() {
+      const iconClass = [];
+      if (this.$slots['left-icon']) {
+        iconClass.push('input-group_icon-left');
+      }
+      if (this.$slots['right-icon']) {
+        iconClass.push('input-group_icon-right');
+      }
+      if (iconClass.length) {
+        iconClass.unshift('input-group_icon');
+      }
+      return iconClass;
+    },
+
+    inputClass() {
+      const inputClass = [];
+      if (this.rounded) {
+        inputClass.push('form-control_rounded');
+      }
+      if (this.small) {
+        inputClass.push('form-control_sm');
+      }
+      return inputClass;
+    },
+  },
 };
 </script>
 
