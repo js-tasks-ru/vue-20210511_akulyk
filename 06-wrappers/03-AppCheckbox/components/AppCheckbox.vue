@@ -32,7 +32,6 @@ export default {
     listeners() {
       const listeners = { ...this.$listeners };
       delete listeners.change;
-      delete listeners.input;
       return listeners;
     },
   },

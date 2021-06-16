@@ -1,5 +1,12 @@
 <template>
-  <div class="input-group" :class="iconClass">
+  <div
+    class="input-group"
+    :class="{
+      'input-group_icon': hasLeftIcon || hasRightIcon,
+      'input-group_icon-left': hasLeftIcon,
+      'input-group_icon-right': hasRightIcon,
+    }"
+  >
     <slot name="left-icon" />
     <component
       :is="inputType"
@@ -7,7 +14,7 @@
       ref="input"
       :value.prop="value"
       class="form-control"
-      :class="inputClass"
+      :class="{'form-control_rounded':rounded, 'form-control_sm': small}"
       v-on="listeners"
       @input="$emit('input', $event.target.value)"
       @change="$emit('change', $event.target.value)"
@@ -43,7 +50,7 @@ export default {
   },
 
   computed: {
-    listeners(){
+    listeners() {
       const listeners = { ...this.$listeners };
       delete listeners.input;
       delete listeners.change;
@@ -54,30 +61,14 @@ export default {
       return this.multiline ? 'textarea' : 'input';
     },
 
-    iconClass() {
-      const iconClass = [];
-      if (this.$slots['left-icon']) {
-        iconClass.push('input-group_icon-left');
-      }
-      if (this.$slots['right-icon']) {
-        iconClass.push('input-group_icon-right');
-      }
-      if (iconClass.length) {
-        iconClass.unshift('input-group_icon');
-      }
-      return iconClass;
+    hasLeftIcon() {
+      return !!this.$slots['left-icon'];
     },
 
-    inputClass() {
-      const inputClass = [];
-      if (this.rounded) {
-        inputClass.push('form-control_rounded');
-      }
-      if (this.small) {
-        inputClass.push('form-control_sm');
-      }
-      return inputClass;
+    hasRightIcon() {
+      return !!this.$slots['right-icon'];
     },
+    
   },
 };
 </script>
