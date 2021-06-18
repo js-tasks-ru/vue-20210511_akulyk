@@ -1,10 +1,15 @@
 <template>
   <div
     class="input-group"
-    :class="{ 'input-group_icon': !!$slots['left-icon'], 'input-group_icon-left': !!$slots['left-icon'] }"
+    :class="{
+      'input-group_icon': !!slots['left-icon'] || !!slots['right-icon'],
+      'input-group_icon-left': !!slots['left-icon'],
+      'input-group_icon-right': !!slots['right-icon'],
+    }"
   >
     <slot name="left-icon"></slot>
     <input class="form-control" :value="value" v-bind="$attrs" v-on="listeners" />
+    <slot name="right-icon"></slot>
   </div>
 </template>
 
@@ -18,10 +23,14 @@ export default {
   },
 
   props: {
-    value: String,
+    value: [String, Number, Date],
   },
 
   computed: {
+    slots() {
+      return { ...this.$slots, ...this.$scopedSlots };
+    },
+
     listeners() {
       return {
         ...this.$listeners,
