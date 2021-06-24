@@ -1,7 +1,11 @@
 const config = {
   preset: '@vue/cli-plugin-unit-jest',
+  rootDir: '.',
   modulePaths: ['utility_modules'],
   testMatch: ['**/__tests__/**/*.(spec|test|student-test).[jt]s?(x)'],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash',
+  },
 };
 
 if (process.env.TASK_MONITOR) {
