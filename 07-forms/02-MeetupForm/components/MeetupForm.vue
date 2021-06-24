@@ -59,7 +59,7 @@ import MeetupAgendaItemForm from './MeetupAgendaItemForm.vue';
 import ImageUploader from './ImageUploader';
 import DateInput from './DateInput';
 import AppInput from './AppInput';
-import {cloneDeep} from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 
 let lastId = -1;
 
@@ -141,7 +141,7 @@ export default {
     },
 
     handleSubmit() {
-      this.$emit('submit',{ ...this.model });
+      this.$emit('submit', cloneDeep(this.model));
     },
   },
 };
