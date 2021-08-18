@@ -16,6 +16,11 @@ export default {
       required: true,
     },
   },
+  methods:{
+    scrollBottom(){
+      this.$refs['list'].scrollTop = this.$refs['list'].scrollHeight;
+    },
+  },
 };
 </script>
 
