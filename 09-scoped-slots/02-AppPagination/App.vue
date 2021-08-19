@@ -6,15 +6,15 @@
       </button>
     </div>
 
-    <hr />
+    <hr/>
 
     <app-pagination v-slot="{ item }" :page="page" :per-page="5" :items="cards">
       <!-- item - параметр слота с данными одного элемента данных  -->
       <!-- Вы можете использовать другое имя параметра слота -->
-      <fieldset :key="item.id">
-        <legend>Card #{{ item.id }}</legend>
-        {{ item.text }}
-      </fieldset>
+        <fieldset :key="item.id">
+          <legend>Card #{{ item.id }}</legend>
+          {{ item.text }}
+        </fieldset>
     </app-pagination>
   </div>
 </template>
@@ -24,7 +24,7 @@ import AppPagination from './components/AppPagination';
 
 export default {
   name: 'App',
-  components: { AppPagination },
+  components: {AppPagination},
 
   data() {
     return {
