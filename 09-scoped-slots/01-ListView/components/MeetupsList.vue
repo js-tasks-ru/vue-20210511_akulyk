@@ -1,25 +1,18 @@
 <template>
   <list-view :items="meetupsWithCoverAndBadge">
-    <!--
-    "X" - некоторый элемент списка, полученный из параметров слота.
-    Имя параметра выберите сами и замените X на него в коде ниже.
-
-    <list-view-card
-      tag="router-link"
-      :to="{ name: 'meetup', params: { meetupId: X.id } }"
-      :key="X.id"
-      :title="X.title"
-      :cover="X.cover"
-      :badge="X.badge"
-      :badge-success="X.badgeSuccess"
-    >
-      <meetup-info
-        :date="X.date"
-        :place="X.place"
-        :organizer="X.organizer"
-      />
-    </list-view-card>
-    -->
+    <template #default="{ item: meetup }">
+      <list-view-card
+        :key="meetup.id"
+        tag="router-link"
+        :to="{ name: 'meetup', params: { meetupId: meetup.id } }"
+        :title="meetup.title"
+        :cover="meetup.cover"
+        :badge="meetup.badge"
+        :badge-success="meetup.badgeSuccess"
+      >
+        <meetup-info :date="meetup.date" :place="meetup.place" :organizer="meetup.organizer"/>
+      </list-view-card>
+    </template>
   </list-view>
 </template>
 
@@ -27,12 +20,12 @@
 import ListView from './ListView';
 import ListViewCard from './ListViewCard';
 import MeetupInfo from './MeetupInfo';
-import { getImageUrlByImageId } from '../data';
+import {getImageUrlByImageId} from '../data';
 
 export default {
   name: 'MeetupsList',
 
-  components: { ListView, ListViewCard, MeetupInfo },
+  components: {ListView, ListViewCard, MeetupInfo},
 
   props: {
     meetups: {
@@ -44,7 +37,7 @@ export default {
   computed: {
     meetupsWithCoverAndBadge() {
       return this.meetups.map((meetup) => {
-        const newMeetup = { ...meetup };
+        const newMeetup = {...meetup};
         if (meetup.attending) {
           newMeetup.badge = 'Участвую';
           newMeetup.badgeSuccess = true;
