@@ -24,7 +24,7 @@ import AppPagination from './components/AppPagination';
 
 export default {
   name: 'App',
-  components: {AppPagination},
+  components: { AppPagination },
 
   data() {
     return {
