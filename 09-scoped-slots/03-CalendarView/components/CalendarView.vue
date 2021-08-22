@@ -17,7 +17,7 @@
             :class="{ rangepicker__cell_inactive: !date.active, rangepicker__current: date.current }"
           >
             {{ date.day }}
-            <slot :full-date="date.fullDate"/>
+            <slot name="ceil-content" :full-date="date.fullDate"/>
           </div>
         </template>
       </div>

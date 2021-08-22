@@ -1,8 +1,4 @@
 <template>
-  <div>
-    <template v-for="meetup in mappedMeetups">
-      {{ meetup.fullDate }}
-    </template>
     <calendar-view v-slot="{ fullDate }">
       <template v-for="meetup in mappedMeetups">
         <template v-if="meetup.fullDate === fullDate">
@@ -16,7 +12,6 @@
         </template>
       </template>
     </calendar-view>
-  </div>
 </template>
 
 <script>
