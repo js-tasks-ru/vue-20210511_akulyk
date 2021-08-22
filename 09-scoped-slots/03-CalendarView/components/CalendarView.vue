@@ -3,31 +3,61 @@
     <div class="rangepicker__calendar">
       <div class="rangepicker__month-indicator">
         <div class="rangepicker__selector-controls">
-          <button class="rangepicker__selector-control-left"></button>
-          <div>Январь 2021</div>
-          <button class="rangepicker__selector-control-right"></button>
+          <button class="rangepicker__selector-control-left" @click="prevMonth"></button>
+          <div>{{ currentMonth }} {{ currentYear }}</div>
+          <button class="rangepicker__selector-control-right" @click="nextMonth"></button>
         </div>
       </div>
       <div class="rangepicker__date-grid">
-        <div class="rangepicker__cell rangepicker__cell_inactive">28</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">29</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">30</div>
-        <div class="rangepicker__cell rangepicker__cell_inactive">31</div>
-        <div class="rangepicker__cell">
-          1
-          <a class="rangepicker__event">Митап</a>
-          <a class="rangepicker__event">Митап</a>
-        </div>
-        <div class="rangepicker__cell">2</div>
-        <div class="rangepicker__cell">3</div>
+        <template v-for="week in grid">
+          <div
+            v-for="date in week"
+            :key="date.date.toString()"
+            class="rangepicker__cell"
+            :class="{ rangepicker__cell_inactive: !date.active, rangepicker__current: date.current }"
+          >
+            {{ date.day }}
+            <slot :full-date="date.fullDate"/>
+          </div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getNextMonth, getPrevMonth, buildMonthItems, buildMonthMatrix } from '../utils';
+
 export default {
   name: 'CalendarView',
+  data: () => ({
+    current: new Date(),
+  }),
+
+  computed: {
+    currentMonth() {
+      return this.current.toLocaleString(navigator.language, { month: 'long' });
+    },
+
+    currentYear() {
+      return this.current.toLocaleString(navigator.language, { year: 'numeric' });
+    },
+
+    grid() {
+      let items = buildMonthItems(this.current);
+      return buildMonthMatrix(items);
+    },
+  },
+
+  methods: {
+    nextMonth() {
+      this.current = getNextMonth(this.current);
+    },
+
+    prevMonth() {
+      this.current = getPrevMonth(this.current);
+    },
+  },
 };
 </script>
 
