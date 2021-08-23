@@ -1,11 +1,8 @@
 <template>
   <div>
-    <template v-for="meetup in mappedMeetups">
-      {{ meetup.fullDate }}
-    </template>
     <calendar-view v-slot="{ fullDate }">
-      <template v-for="meetup in mappedMeetups">
-        <template v-if="meetup.fullDate === fullDate">
+      <template v-if="mappedMeetups[fullDate] && mappedMeetups[fullDate].length">
+        <template v-for="meetup in mappedMeetups[fullDate]">
           <router-link
             :key="meetup.id"
             :to="{ name: 'meetup', params: { meetupId: meetup.id } }"
@@ -38,13 +35,15 @@ export default {
 
   computed: {
     mappedMeetups() {
-      return this.meetups.map((meetup) => {
+      const map = {};
+      this.meetups.map((meetup) => {
         const fullDate = new Date(meetup.date).toLocaleDateString();
-        return {
-          ...meetup,
-          fullDate,
-        };
+        if (!map[fullDate]) {
+          map[fullDate] = [];
+        }
+        map[fullDate].push({ ...meetup, fullDate });
       });
+      return map;
     },
   },
 };
