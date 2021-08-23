@@ -3,7 +3,6 @@
     <div style="margin: 2rem; flex: 1 0">
       <meetups-calendar v-if="meetups" :meetups="meetups" />
     </div>
-
   </div>
 </template>
 
@@ -15,7 +14,6 @@ import { fetchMeetups } from './data';
 export default {
   name: 'App',
   components: { MeetupsCalendar },
-
   data() {
     return {
       meetups: null,
