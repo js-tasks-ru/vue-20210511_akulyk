@@ -1,14 +1,16 @@
 <template>
-  <calendar-view v-slot="{ fullDate }">
-    <template v-if="mappedMeetups[fullDate] && mappedMeetups[fullDate].length">
-      <template v-for="meetup in mappedMeetups[fullDate]">
-        <router-link
-          :key="meetup.id"
-          :to="{ name: 'meetup', params: { meetupId: meetup.id } }"
-          class="rangepicker__event"
-        >
-          {{ meetup.title }}
-        </router-link>
+  <calendar-view>
+    <template #ceil="{ fullDate }">
+      <template v-if="mappedMeetups[fullDate] && mappedMeetups[fullDate].length">
+        <template v-for="meetup in mappedMeetups[fullDate]">
+          <router-link
+            :key="meetup.id"
+            :to="{ name: 'meetup', params: { meetupId: meetup.id } }"
+            class="rangepicker__event"
+          >
+            {{ meetup.title }}
+          </router-link>
+        </template>
       </template>
     </template>
   </calendar-view>
